@@ -1,0 +1,8 @@
+Namespace(files=[<_io.TextIOWrapper name='hello_3.txt' mode='r' encoding='UTF-8'>, <_io.TextIOWrapper name='hello.txt' mode='r' encoding='UTF-8'>], number=False)
+fhsfsklfhkldfhkfjkld;f
+jfdklfjldk;fjklsj
+kjf;sldjfk;erf
+hehehehuahdudhueh
+huadhuhduaehdude
+huedhauhdusa
+cnudcndcunua
