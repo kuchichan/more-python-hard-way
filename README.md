@@ -1,4 +1,4 @@
-# Zed Shaw's "More Python the hard way solutions"
+# Zed Shaw's "More Python the Hard Way" solutions
 
 ## Purpose 
 
