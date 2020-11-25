@@ -21,7 +21,8 @@ def print_elements(list_):
 def check(list_, sorted_list):
     if list_ == sorted_list:
         sys.exit(os.EX_OK)
-    sys.exit(os.EX_SOFTWARE)
+    else:
+        sys.exit(os.EX_SOFTWARE)
 
 
 def g_numeric_sort(list_, reverse=False, key=None):
