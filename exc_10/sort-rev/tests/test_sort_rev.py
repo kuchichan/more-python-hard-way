@@ -4,7 +4,14 @@ import random
 import string
 
 from sort_rev import __version__
-from sort_rev.sort import check, g_numeric_sort
+from sort_rev.sort import (
+    check,
+    g_numeric_sort,
+    get_input,
+    ignore_case,
+    ignore_leading_lines,
+    print_elements,
+)
 
 
 @pytest.fixture
@@ -15,7 +22,11 @@ def random_int_list(request):
 @pytest.fixture
 def random_str_list(request):
     def generate_random_word():
-        return "".join(letter for letter in random.choices(string.ascii_letters, k=random.randint(1,8)))
+        return "".join(
+            letter
+            for letter in random.choices(string.ascii_letters, k=random.randint(1, 8))
+        )
+
     return [generate_random_word() for _ in range(request.param)]
 
 
@@ -52,15 +63,31 @@ def test_check_calls_os_ex_when_lists_are_not_equal(list_1, list_2, mocker):
 
 
 @pytest.mark.parametrize(
-    "random_int_list, random_str_list", [
+    "random_int_list, random_str_list",
+    [
         (3, 3),
         (5, 2),
         (10, 10),
-    ], indirect=True
+    ],
+    indirect=True,
 )
 def test_check_g_numeric_sort(random_int_list, random_str_list):
     given = random_str_list + random_int_list
     expected = sorted(random_str_list) + sorted(random_int_list)
 
     assert g_numeric_sort(given) == expected
-    
+
+
+def test_ignore_case():
+    assert ignore_case("HEllO") == "HELLO"
+
+
+def test_ignore_leading_lines():
+    assert ignore_leading_lines("    hello") == "hello"
+
+
+def test_print_elements(capfd):
+    data = ["hi", "hello", "bonjour"]
+    print_elements(data)
+    captured = capfd.readouterr()
+    assert "\n".join(data) + "\n" == captured.out
