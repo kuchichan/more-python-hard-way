@@ -48,18 +48,23 @@ def ignore_leading_lines(elem):
     return elem.strip()
 
 
+def decorate_sort(decorating, decorated):
+    def wrapper(elem):
+        return decorating(decorated(elem))
+
+    return wrapper
+
+
 def apply_(args):
-    if args.ignore_leading_lines and args.ignore_case:
-        return lambda x: ignore_case(ignore_leading_lines(x))
-    elif args.ignore_leading_lines:
-        return lambda x: ignore_leading_lines(x)
-    elif args.ignore_case:
-        return lambda x: ignore_case(x)
-    else:
-        return lambda x: x
+    func = lambda x: x
+    if args.ignore_leading_lines:
+        func = decorate_sort(ignore_leading_lines, func)
+    if args.ignore_case:
+        func = decorate_sort(ignore_case, func)
+    return func
 
 
-if __name__ == "__main__":
+def parse_arguments():
     parser = argparse.ArgumentParser("sort")
     parser.add_argument("--reverse", "-r", action="store_true", default=False)
     parser.add_argument(
@@ -71,7 +76,11 @@ if __name__ == "__main__":
     )
     parser.add_argument("--check", "-c", action="store_true", default=False)
 
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main():
+    args = parse_arguments()
 
     elements_to_sort = [x for x in get_input()]
     key = apply_(args)
@@ -85,3 +94,7 @@ if __name__ == "__main__":
         check(elements_to_sort, sorted_elements)
 
     print_elements(sorted_elements)
+
+
+if __name__ == "__main__":
+    main()

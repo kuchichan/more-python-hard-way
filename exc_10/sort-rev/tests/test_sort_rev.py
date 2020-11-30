@@ -2,16 +2,10 @@ import os
 import pytest
 import random
 import string
+import io
 
 from sort_rev import __version__
-from sort_rev.sort import (
-    check,
-    g_numeric_sort,
-    get_input,
-    ignore_case,
-    ignore_leading_lines,
-    print_elements,
-)
+from sort_rev.sort import apply_, check, g_numeric_sort, get_input, ignore_case, ignore_leading_lines, print_elements
 
 
 @pytest.fixture
@@ -91,3 +85,32 @@ def test_print_elements(capfd):
     print_elements(data)
     captured = capfd.readouterr()
     assert "\n".join(data) + "\n" == captured.out
+
+
+def test_get_input(mocker):
+    data = ["Hi\n", "There\n", "Captain\n"]
+    copied_data = data[:]
+
+    def pop():
+        try:
+            return copied_data.pop()
+        except IndexError:
+            raise EOFError
+
+    mocker.patch("builtins.input", pop)
+    result = [x for x in get_input()]
+    assert result == data[::-1]
+
+@pytest.mark.parametrize("leading, case, elem, expected", [
+    (True, True, " hehe", "HEHE"),
+    (True, False, " hehe", "hehe" ),
+    (False, True, " hehe", " HEHE" ),
+    (False, False, " hehe", " hehe" ),
+])
+def test_apply_(leading, case, elem, expected, mocker):
+    args = mocker.Mock()
+    args.ignore_leading_lines = leading
+    args.ignore_case = case
+
+    func = apply_(args)
+    assert func(elem) == expected
