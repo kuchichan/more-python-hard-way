@@ -33,22 +33,48 @@ class SingleLinkedList:
                 elem = elem.next_
 
             self.end = elem
-            return elem.next_.value
+            val = elem.next_.value
+            self.end.next_ = None
+            return val
 
     def shift(self, obj):
-        self.push(self, obj)
+        new_begin = SingleLinkedNode(obj)
+        if self.begin is None:
+            self.begin = new_begin
+            self.end = self.begin
+        else:
+            new_begin.next_ = self.begin
+            self.begin = new_begin
 
     def unshift(self):
-        ...
+        if self.begin is None:
+            return None
+        val = self.begin.value
+        self.begin = self.begin.next_
+        return val
 
     def remove(self, obj):
-        ...
+        elem = self.begin
+        prev = None
+        index = 0
+        if elem is None:
+            return None
+        while elem.value != obj and elem != None:
+            prev = elem
+            elem = elem.next_
+            index += 1
+        if prev is None:
+            self.begin = elem.next_
+        else:
+            prev.next_ = elem.next_
+
+        return index
 
     def first(self):
-        ...
+        return self.begin.value if self.begin is not None else None
 
     def last(self):
-        ...
+        return self.end.value if self.end is not None else None
 
     def count(self):
         count = 0
@@ -59,7 +85,19 @@ class SingleLinkedList:
         return count
 
     def get(self, index):
-        ...
+        elem = self.begin
+        counter = 0
+        if elem is None:
+            return None
+        while index != counter and elem is not None:
+            elem = elem.next_
+            counter += 1
+
+        return elem.value if elem is not None else None
 
     def dump(self, mark):
-        ...
+        print(mark, ":\n ")
+        elem = self.begin
+        while elem is not None:
+            print(elem.value)
+            elem = elem.next_

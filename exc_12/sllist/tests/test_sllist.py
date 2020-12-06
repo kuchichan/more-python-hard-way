@@ -70,14 +70,14 @@ def test_remove():
     assert colors.remove("Perinone") == 2
     colors.dump("after perinone")
     assert colors.remove("Nickle Yellow") == 1
-    assert colors.remove("Zinc White")
+    assert colors.remove("Zinc White") == 0
     
 
 def test_first():
     colors = SingleLinkedList()
     colors.push("Cadmium Red Light")
     assert colors.first() == "Cadmium Red Light"
-    colors.pus("Hansa Yellow")
+    colors.push("Hansa Yellow")
     assert colors.first() == "Cadmium Red Light"
     colors.shift("Pthalo Green")
 
