@@ -22,7 +22,6 @@ def test_pop():
     colors = SingleLinkedList()
     colors.push("Magenta")
     colors.push("Alizarin")
-    print(colors)
 
     assert colors.pop() == "Alizarin"
     assert colors.pop() == "Magenta"
