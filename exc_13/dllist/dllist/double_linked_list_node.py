@@ -4,5 +4,5 @@ from typing import Optional
 @dataclass
 class DoubleLinkedListNode:
     value: str  # just for clarity
-    prev : Optional["DoubleLinkedListNode"] = None
+    prev_ : Optional["DoubleLinkedListNode"] = None
     next_ : Optional["DoubleLinkedListNode"] = None
