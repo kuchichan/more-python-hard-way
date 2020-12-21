@@ -179,11 +179,11 @@ def test_get_element(stuffed_dlist):
 
 
 def test_first(stuffed_dlist):
-    assert stuffed_dlist.first() == stuffed_dlist.begin
+    assert stuffed_dlist.first() == "Hello"
 
 
 def test_last(stuffed_dlist):
-    assert stuffed_dlist.last() == stuffed_dlist.end
+    assert stuffed_dlist.last() == "Holla"
 
 
 def test_dump(capsys, stuffed_dlist):
