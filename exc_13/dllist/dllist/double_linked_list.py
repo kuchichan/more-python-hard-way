@@ -71,7 +71,7 @@ class DoubleLinkedList:
         while node is not None:
             print(node.value)
             node = node.next_
-
+    
     def count(self) -> int:
         counter = 0
         node = self.begin
@@ -100,3 +100,5 @@ class DoubleLinkedList:
         else:
             node.next_.prev_ = node.prev_
             node.prev_.next_ = node.next_
+
+    
