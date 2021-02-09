@@ -60,9 +60,9 @@ def merge_node(start: DoubleLinkedListNode) -> DoubleLinkedListNode:
     mid_node.prev_ = None
 
     merged_left = merge_node(start)
-    merged_rigt = merge_node(mid_node)
+    merged_right = merge_node(mid_node)
 
-    return merge(merged_left, merged_rigt)
+    return merge(merged_left, merged_right)
 
 
 def merge_sort(numbers: DoubleLinkedList) -> None:
@@ -72,4 +72,39 @@ def merge_sort(numbers: DoubleLinkedList) -> None:
     while node.next_ is not None:
         node = node.next_
 
-    numbers.end = node 
+    numbers.end = node
+
+
+def partition(
+        start: DoubleLinkedListNode 
+) -> DoubleLinkedListNode:
+    mid = count(start) // 2
+    mid_node = start
+    for _ in range(mid):
+        mid_node = mid_node.next_
+
+    end = start
+    for _ in range(count(start) -1):
+        end = end.next_
+        
+    pivot_value = mid_node.value
+    mid_node.value, end.value = end.value, mid_node.value
+
+    node = start
+    current_position = start
+    for _ in range(count(start) - 1):
+        if node.value < pivot_value:
+            node.value, current_position.value = current_position.value, node.value
+            current_position = current_position.next_
+        node = node.next_
+
+    end.value, current_position.value = current_position.value, end.value
+
+    return current_position
+
+def quick_sort(node):
+    if node.next_ is None:
+        return
+    pivot = partition(node)
+    quick_sort(pivot.next_)
+    
