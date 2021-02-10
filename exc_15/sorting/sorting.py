@@ -75,24 +75,32 @@ def merge_sort(numbers: DoubleLinkedList) -> None:
     numbers.end = node
 
 
+def length(node1: DoubleLinkedListNode, node2: DoubleLinkedListNode) -> int:
+    count = 1
+    if node1 is node2:
+        return count
+    start = node1
+    while start is not None:
+        start = start.next_
+        count += 1
+        if start is node2:
+            return count
+    return 1
+
+
 def partition(
-        start: DoubleLinkedListNode 
+    start: DoubleLinkedListNode, end: DoubleLinkedListNode
 ) -> DoubleLinkedListNode:
-    mid = count(start) // 2
+    mid = length(start, end) // 2
     mid_node = start
     for _ in range(mid):
         mid_node = mid_node.next_
-
-    end = start
-    for _ in range(count(start) -1):
-        end = end.next_
-        
     pivot_value = mid_node.value
     mid_node.value, end.value = end.value, mid_node.value
 
     node = start
     current_position = start
-    for _ in range(count(start) - 1):
+    for _ in range(0, length(start, end) - 1):
         if node.value < pivot_value:
             node.value, current_position.value = current_position.value, node.value
             current_position = current_position.next_
@@ -102,9 +110,12 @@ def partition(
 
     return current_position
 
-def quick_sort(node):
-    if node.next_ is None:
+
+def quick_sort(begin: DoubleLinkedListNode, end: DoubleLinkedListNode) -> None:
+    if length(begin, end) <= 1:
         return
-    pivot = partition(node)
-    quick_sort(pivot.next_)
-    
+    pivot = partition(begin, end)
+    if pivot.prev_:
+        quick_sort(begin, pivot.prev_)
+    if pivot.next_:
+        quick_sort(pivot.next_, end)

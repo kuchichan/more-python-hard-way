@@ -1,4 +1,4 @@
-import pytest 
+import pytest
 from random import randint
 
 from exc_15.sorting.sorting import bubble_sort, merge_sort, partition, quick_sort
@@ -14,14 +14,16 @@ def random_list(count):
 
     return numbers
 
-@pytest.fixture
-def simple_list():
+
+@pytest.fixture(params=[[1, 1, 2, 3, 7, 1, 18], [1], [2, 1], [1, 2, 1]])
+def simple_list(request):
     numbers = DoubleLinkedList()
-    values = [4,5,3,1,2 ] 
+    values = request.param
+
     for num in values:
         numbers.push(num)
-
     return numbers
+
 
 def is_sorted(numbers: DoubleLinkedList):
     node = numbers.begin
@@ -46,18 +48,30 @@ def test_merge_sort():
     merge_sort(numbers)
     assert is_sorted(numbers)
 
+
+@pytest.mark.parametrize(
+    "simple_list",
+    [
+        [1, 1, 2, 3, 7, 1, 18],
+    ],
+    indirect=True,
+)
 def test_partition(simple_list):
-    partitioned_node = partition(simple_list.begin)
-    
+    partitioned_node = partition(simple_list.begin, simple_list.end)
+
     # [4, 5, 2, 1, 3]
     # [2, 5, 4, 1, 3]
     # [2, 1, 3, 5, 4]
-    
+
     assert partitioned_node.value == 3
-    print(partitioned_node, "\n\n\n")
+
 
 def test_quick_sort(simple_list):
-    quick_sort(simple_list.begin)
-    print(simple_list)
-    
-     
+    quick_sort(simple_list.begin, simple_list.end)
+    assert is_sorted(simple_list)
+
+
+def test_quick_sort_serious():
+    numbers = random_list(MAX_NUMBERS)
+    quick_sort(numbers.begin, numbers.end)
+    assert is_sorted(numbers)
