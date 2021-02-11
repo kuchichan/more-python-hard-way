@@ -111,11 +111,14 @@ def partition(
     return current_position
 
 
-def quick_sort(begin: DoubleLinkedListNode, end: DoubleLinkedListNode) -> None:
+def quick_sort_node(begin: DoubleLinkedListNode, end: DoubleLinkedListNode) -> None:
     if length(begin, end) <= 1:
         return
     pivot = partition(begin, end)
     if pivot.prev_:
-        quick_sort(begin, pivot.prev_)
+        quick_sort_node(begin, pivot.prev_)
     if pivot.next_:
-        quick_sort(pivot.next_, end)
+        quick_sort_node(pivot.next_, end)
+
+def quick_sort(dlist) -> None:
+    quick_sort_node(dlist.begin, dlist.end)
