@@ -1,7 +1,13 @@
 import pytest
 from random import randint
 
-from exc_15.sorting.sorting import bubble_sort, merge_sort, partition, quick_sort_node, quick_sort
+from exc_15.sorting.sorting import (
+    bubble_sort,
+    merge_sort,
+    partition,
+    quick_sort_node,
+    quick_sort,
+)
 from exc_13.dllist.dllist.double_linked_list import DoubleLinkedList
 
 MAX_NUMBERS = 30
@@ -75,6 +81,7 @@ def test_quick_sort_node_serious():
     numbers = random_list(MAX_NUMBERS)
     quick_sort_node(numbers.begin, numbers.end)
     assert is_sorted(numbers)
+
 
 def test_quick_sort():
     numbers = random_list(MAX_NUMBERS)

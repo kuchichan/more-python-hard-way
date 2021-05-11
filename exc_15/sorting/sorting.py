@@ -120,5 +120,6 @@ def quick_sort_node(begin: DoubleLinkedListNode, end: DoubleLinkedListNode) -> N
     if pivot.next_:
         quick_sort_node(pivot.next_, end)
 
+
 def quick_sort(dlist) -> None:
     quick_sort_node(dlist.begin, dlist.end)
