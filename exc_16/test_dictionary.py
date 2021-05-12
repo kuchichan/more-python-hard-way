@@ -1,43 +1,49 @@
+import pytest
+
 from exc_16.dictionary import Dictionary
 
-states = Dictionary()
-states.set("Oregon", "OR")
-states.set('Florida', 'FL')
-states.set('California', 'CA')
-states.set('New York', 'NY')
-states.set('Michigan', 'MI')
+@pytest.fixture
+def states_dict():
+    states = Dictionary()
+    states.set("Oregon", "OR")
+    states.set('Florida', 'FL')
+    states.set('California', 'CA')
+    states.set('New York', 'NY')
+    states.set('Michigan', 'MI')
+    return states
 
 
-cities = Dictionary()
-cities.set("CA", "San Francisco")
-cities.set("MI", "Detroit")
-cities.set("FL", "Jacksonville")
-cities.set("NY", "New York")
-cities.set("OR", "Portland")
+@pytest.fixture
+def cities_dict():
+    cities = Dictionary()
+    cities.set("CA", "San Francisco")
+    cities.set("MI", "Detroit")
+    cities.set("FL", "Jacksonville")
+    cities.set("NY", "New York")
+    cities.set("OR", "Portland")
 
-print("-" * 10)
-print("NY State has %s" % cities.get("NY"))
-print("OR State has %s" % cities.get("OR"))
+    return cities
 
-print("-" * 10)
-print("Michigan's abbreviation is %s" % states.get("Michigan"))
-print("Florida's abbreviation is %s" % states.get("Florida"))
+def test_dictionary_set_and_get_values(states_dict):
+    assert states_dict.get("Oregon") == "OR"
+    assert states_dict.get("Florida") == "FL"
+    assert states_dict.get("California") == "CA"
+    assert states_dict.get("New York") == "NY"
+    assert states_dict.get("Michigan") == "MI"
 
-print("-" * 10)
-print("Michigan has %s" % cities.get(states.get("Michigan")))
-print("Florida has %s" % cities.get(states.get("Florida")))
 
-print("-" * 10)
-states.list()
+def test_dictionary_can_get_based_on_get_from_different_dict(states_dict, cities_dict):
+    assert cities_dict.get(states_dict.get("Michigan")) == "Detroit"
+    assert cities_dict.get(states_dict.get("Florida")) == "Jacksonville"
 
-print("-" * 10)
-cities.list()
+    
+def test_dictionary_list(states_dict, cities_dict):
+    states_dict.list()
+    cities_dict.list()
 
-print("-" * 10)
-state = states.get("Texas")
+def test_dicitionary_no_key(states_dict):
+     assert states_dict.get("Texas") is None
 
-if not state:
-    print("Sorry, no Texas.")
-
-city = cities.get("TX", "Does not exist.")
-print("The city for the state 'TX' is: %s" % city)
+def test_dicitionary_key_returns_default_value(cities_dict):
+    default_value = "Does not exist."
+    assert default_value == cities_dict.get("TX", default_value)

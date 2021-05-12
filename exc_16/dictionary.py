@@ -1,4 +1,5 @@
 from exc_13.dllist.dllist.double_linked_list import DoubleLinkedList 
+
 class Dictionary(object):    
     
     def __init__(self, num_buckets=256) -> None:
@@ -31,14 +32,14 @@ class Dictionary(object):
                 if key == node.value[0]:
                     return bucket, node
                 else:
-                    node = node.next
+                    node = node.next_
                     i += 1
 
-        return bucket, None
+        return bucket, None 
     
     def get(self, key, default=None):
         bucket, node = self.get_slot(key, default=default)
-        return node and node.value[1] or node
+        return node and node.value[1] or default 
 
     def set(self, key, value):
         bucket, slot = self.get_slot(key)
