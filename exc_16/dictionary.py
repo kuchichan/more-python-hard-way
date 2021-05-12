@@ -26,7 +26,7 @@ class Dictionary(object):
         bucket = self.get_bucket(key)
         if bucket:
             node = bucket.begin
-            i = 0 
+            i = 0 # why is this here? 
 
             while node:
                 if key == node.value[0]:
@@ -56,9 +56,9 @@ class Dictionary(object):
         node = bucket.begin
 
         while node:
-            k, v = node.value
+            k, v = node.value # why is this here?
             if key == k:
-                bucket.detach_node(node)
+                bucket.detach(node)
                 break
 
     def list(self):

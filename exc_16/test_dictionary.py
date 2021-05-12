@@ -1,6 +1,6 @@
 import pytest
 
-from exc_16.dictionary import Dictionary
+from exc_16.dictionary_appr_1 import Dictionary
 
 @pytest.fixture
 def states_dict():
@@ -47,3 +47,8 @@ def test_dicitionary_no_key(states_dict):
 def test_dicitionary_key_returns_default_value(cities_dict):
     default_value = "Does not exist."
     assert default_value == cities_dict.get("TX", default_value)
+
+
+def test_delete(cities_dict):
+    cities_dict.delete("CA")
+    assert cities_dict.get("CA") is None
