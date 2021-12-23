@@ -1,4 +1,4 @@
-from exc_13.dllist.dllist.double_linked_list import DoubleLinkedList 
+from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList 
 
 class Dictionary(object):    
     

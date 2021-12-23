@@ -1,10 +1,4 @@
-from sllist import __version__
-from sllist.single_linked_list import SingleLinkedList
-from sllist.single_linked_node import SingleLinkedNode
-
-
-def test_version():
-    assert __version__ == '0.1.0'
+from exc_12_single_linked_list.single_linked_list.sl_list import SingleLinkedList
 
 
 def test_push():

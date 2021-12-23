@@ -1,14 +1,14 @@
 import pytest
 from random import randint
 
-from exc_15.sorting.sorting import (
+from exc_15_sorting_algos.sorting.sorting import (
     bubble_sort,
     merge_sort,
     partition,
     quick_sort_node,
     quick_sort,
 )
-from exc_13.dllist.dllist.double_linked_list import DoubleLinkedList
+from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
 
 MAX_NUMBERS = 30
 

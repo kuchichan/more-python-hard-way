@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from .double_linked_list_node import DoubleLinkedListNode
+from .dl_node import DoubleLinkedListNode
 from typing import Optional
 
 
@@ -28,14 +28,14 @@ class DoubleLinkedList:
             node.next_ = self.begin
             self.begin = node
 
-    def pop(self) -> str:
+    def pop(self) -> Optional[str]:
         if self.end is None:
             return
         value = self.end.value
         self.detach(self.end)
         return value
 
-    def unshift(self) -> str:
+    def unshift(self) -> Optional[str]:
         if self.begin is None:
             return
         value = self.begin.value
@@ -50,7 +50,7 @@ class DoubleLinkedList:
                 return
             node = node.next_
 
-    def get(self, index: int) -> str:
+    def get(self, index: int) -> Optional[str]:
         counter = 0
         node = self.begin
         while counter < index and node is not None:

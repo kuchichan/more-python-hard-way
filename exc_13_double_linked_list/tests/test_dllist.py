@@ -1,8 +1,6 @@
 import pytest
 
-from dllist import __version__
-from dllist.double_linked_list import DoubleLinkedList
-from dllist.double_linked_list_node import DoubleLinkedListNode
+from ..double_linked_list.dl_list import DoubleLinkedList
 
 
 @pytest.fixture
@@ -12,10 +10,6 @@ def stuffed_dlist():
     d_list.push("Bonjour")
     d_list.push("Holla")
     return d_list
-
-
-def test_version():
-    assert __version__ == "0.1.0"
 
 
 def test_push():

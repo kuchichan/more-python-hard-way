@@ -1,5 +1,5 @@
-from stacksnqueues import __version__
-from stacksnqueues.stack import StackNode, Stack, QueueNode, Queue
+from exc_14_stacks_queues.stacks_queues import __version__
+from exc_14_stacks_queues.stacks_queues.stack import Stack, Queue
 
 
 def test_version():
