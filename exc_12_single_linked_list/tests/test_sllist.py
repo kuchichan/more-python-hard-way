@@ -1,4 +1,4 @@
-from exc_12_single_linked_list.single_linked_list.sl_list import SingleLinkedList
+from ..single_linked_list.sl_list import SingleLinkedList
 
 
 def test_push():

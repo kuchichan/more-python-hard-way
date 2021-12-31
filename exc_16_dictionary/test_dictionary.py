@@ -1,18 +1,15 @@
 import pytest
 
-from exc_16.dictionary_appr_1 import Dictionary
+from .dictionary_appr_1 import Dictionary
 
 @pytest.fixture
 def states_dict():
     states = Dictionary()
-    keys = [x+y for x in "abcdefghijk" for y in "123456789"]
-    for elem in keys:
-    # states.set("Oregon", "OR")
-    # states.set('Florida', 'FL')
-    # states.set('California', 'CA')
-    # states.set('New York', 'NY')
-    # states.set('Michigan', 'MI')
-        states.set(elem, "VALUE: " + elem)
+    states.set("Oregon", "OR")
+    states.set('Florida', 'FL')
+    states.set('California', 'CA')
+    states.set('New York', 'NY')
+    states.set('Michigan', 'MI')
 
     return states
 
@@ -29,12 +26,11 @@ def cities_dict():
     return cities
 
 def test_dictionary_set_and_get_values(states_dict):
-    assert states_dict.get("a1") == "OR"
-    assert states_dict.get("c3") == "FL"
-    assert states_dict.get("g6") == "CA"
-    assert states_dict.get("k9") == "CA"
-    # assert states_dict.get("New York") == "NY"
-    # assert states_dict.get("Michigan") == "MI"
+    assert states_dict.get("Oregon") == "OR"
+    assert states_dict.get("Florida") == "FL"
+    assert states_dict.get("California") == "CA"
+    assert states_dict.get("New York") == "NY"
+    assert states_dict.get("Michigan") == "MI"
 
 
 def test_dictionary_can_get_based_on_get_from_different_dict(states_dict, cities_dict):

@@ -1,9 +1,4 @@
-from exc_14_stacks_queues.stacks_queues import __version__
-from exc_14_stacks_queues.stacks_queues.stack import Stack, Queue
-
-
-def test_version():
-    assert __version__ == "0.1.0"
+from ..stacks_queues.stack import Stack, Queue
 
 
 def test_push():
