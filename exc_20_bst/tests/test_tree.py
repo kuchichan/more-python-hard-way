@@ -53,3 +53,33 @@ def test_set_existing_value(two_level_deep_tree):
     assert two_level_deep_tree.root.left.value == "Hi" 
     assert two_level_deep_tree.root.right.key == 21 
     assert two_level_deep_tree.root.right.value == "Hallo" 
+
+
+def test_delete_single_element_bst_tree():
+    tree = BSTree(10, "aaa")
+
+    assert tree.root.value == "aaa" 
+    assert tree.root.key == 10 
+    
+    tree.delete(10)
+
+    assert tree.root == None
+
+
+def test_delete_element_with_one_child():
+    tree = BSTree(10, "aaa")
+    tree.set(20, "bbb")
+    tree.set(30, "ccc")
+
+    middle_node = tree.get(20)
+    last_node = tree.get(30)
+
+    assert middle_node.value == "bbb"
+    assert middle_node.parent == tree.root
+    assert middle_node.right.key == 30
+    assert middle_node.right.value ==  "ccc"
+
+    tree.delete(20)
+
+    assert tree.root.right == last_node 
+    assert tree.get(20) is None
