@@ -17,7 +17,7 @@ class BSTree:
         return self._sentinel.left
 
     def get(self, key) -> Optional[BSTreeNode]:
-        cur_node = self.root
+        cur_node = self.root 
 
         while cur_node is not None:
             if cur_node.key > key:
@@ -54,23 +54,37 @@ class BSTree:
         else:
             previous.right = new_node
 
-    def delete(self, key: int) -> None:
-        node_to_delete = self.get(key)
-        if node_to_delete is None:
-            return
-
-        previous = node_to_delete.parent
-        previous = cast(BSTreeNode, previous)
+    def find_min_node(self, node: Optional[BSTreeNode]) -> BSTreeNode:
+        if node is None:
+            return self._sentinel 
         
-        while node_to_delete is not None:
+        min_value = node
+        while min_value.left is not None:
+            min_value = min_value.left
+            
+        return min_value
+
+    def delete(self, key: int) -> None:
+        nodes_to_delete = [self.get(key)]
+
+        if nodes_to_delete[0] is None:
+            return
+        
+        while nodes_to_delete:
+            node_to_delete = nodes_to_delete.pop()
+            previous = node_to_delete.parent
+            previous = cast(BSTreeNode, previous)
+ 
             if not node_to_delete.left and not node_to_delete.right:
                 self._set_prev_node(key, previous, None)
-                node_to_delete = None
                 
             elif node_to_delete.left and not node_to_delete.right:
                 self._set_prev_node(key, previous, node_to_delete.left)
-                node_to_delete = None
 
             elif node_to_delete.right and not node_to_delete.left:
                 self._set_prev_node(key, previous, node_to_delete.right)
-                node_to_delete = None
+            else:
+                successor = self.find_min_node(node_to_delete.right)
+                node_to_delete.key = successor.key
+                node_to_delete.value = successor.value
+                nodes_to_delete.append(successor)
