@@ -30,7 +30,8 @@ def test_get_is_taking_existing_value(two_level_deep_tree):
     assert two_level_deep_tree.get(18).value == "Hehe"
     assert two_level_deep_tree.get(24).value == "Czesc"
     assert two_level_deep_tree.get(16).value == "Bonjour"
-    
+
+
 def test_get_returns_None_when_value_does_not_exist_in_tree(two_level_deep_tree):
     assert two_level_deep_tree.get(27) is None
     assert two_level_deep_tree.get(10) is None
@@ -52,17 +53,17 @@ def test_set_existing_value(two_level_deep_tree):
 
     assert two_level_deep_tree.root.value == "HAHA"
     assert two_level_deep_tree.root.left.key == 15
-    assert two_level_deep_tree.root.left.value == "Hi" 
-    assert two_level_deep_tree.root.right.key == 21 
-    assert two_level_deep_tree.root.right.value == "Hallo" 
+    assert two_level_deep_tree.root.left.value == "Hi"
+    assert two_level_deep_tree.root.right.key == 21
+    assert two_level_deep_tree.root.right.value == "Hallo"
 
 
 def test_delete_single_element_bst_tree():
     tree = BSTree(10, "aaa")
 
-    assert tree.root.value == "aaa" 
-    assert tree.root.key == 10 
-    
+    assert tree.root.value == "aaa"
+    assert tree.root.key == 10
+
     tree.delete(10)
 
     assert tree.root == None
@@ -79,13 +80,12 @@ def test_delete_element_with_one_child():
     assert middle_node.value == "bbb"
     assert middle_node.parent == tree.root
     assert middle_node.right.key == 30
-    assert middle_node.right.value ==  "ccc"
+    assert middle_node.right.value == "ccc"
 
     tree.delete(20)
 
-    assert tree.root.right == last_node 
+    assert tree.root.right == last_node
     assert tree.get(20) is None
-
 
 
 def test_get_min_value_from_root(two_level_deep_tree):
@@ -96,30 +96,41 @@ def test_get_min_value_from_root(two_level_deep_tree):
     node = two_level_deep_tree.find_min_node(two_level_deep_tree.root.right)
 
     assert node.key == 19
-    
+
 
 def test_delete_with_both_nested_children(two_level_deep_tree):
     two_level_deep_tree.delete(18)
-    
+
     assert two_level_deep_tree.root.key == 19
-    assert two_level_deep_tree.root.value == "Nihao" 
+    assert two_level_deep_tree.root.value == "Nihao"
 
     assert two_level_deep_tree.root.left.key == 15
-    assert two_level_deep_tree.root.right.key == 21  
-    assert two_level_deep_tree.root.right.left.key == 20  
+    assert two_level_deep_tree.root.right.key == 21
+    assert two_level_deep_tree.root.right.left.key == 20
     assert two_level_deep_tree.root.right.right.key == 24
 
-    
+
 def test_calculate_max_depth(two_level_deep_tree):
-    assert two_level_deep_tree.root.calc_max_depth() == 3 
-    
+    assert two_level_deep_tree.root.calc_max_depth() == 3
+
     two_level_deep_tree.set(1, "hi")
     assert two_level_deep_tree.root.calc_max_depth() == 3
-    
+
     two_level_deep_tree.set(28, "hi")
     assert two_level_deep_tree.root.calc_max_depth() == 3
-    
+
     two_level_deep_tree.set(32, "hi")
     assert two_level_deep_tree.root.calc_max_depth() == 4
-    
 
+
+def test_draw_basic_tree():
+    tree = BSTree(key=10, value="hehe")
+    tree.set(5, "haha")
+    tree.set(4, "haha")
+    tree.set(6, "haha")
+    tree.set(15, "hehe")
+    tree.set(12, "hehe")
+    tree.set(17, "hehe")
+    print("\n")
+    tree.root.display()
+    
