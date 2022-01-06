@@ -1,4 +1,5 @@
 import pytest
+import random
 from ..bs_tree import BSTree
 from ..bs_tree_node import BSTreeNode
 
@@ -124,13 +125,9 @@ def test_calculate_max_depth(two_level_deep_tree):
 
 
 def test_draw_basic_tree():
-    tree = BSTree(key=10, value="hehe")
-    tree.set(5, "haha")
-    tree.set(4, "haha")
-    tree.set(6, "haha")
-    tree.set(15, "hehe")
-    tree.set(12, "hehe")
-    tree.set(17, "hehe")
     print("\n")
+    tree = BSTree(key=10, value="hehe")
+    for _ in range(50):
+        tree.set(random.choice(range(50)), "")
     tree.root.display()
     

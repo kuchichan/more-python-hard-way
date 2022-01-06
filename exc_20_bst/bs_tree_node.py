@@ -18,6 +18,40 @@ class BSTreeNode:
             middle = key_width // 2
             return [s], key_width, height, middle
 
+        if self.right is None:
+            left_tree, l_width, l_height, middle_l = self.left.draw_node()
+            s = str(self.key)
+            key_width = len(s)
+
+            first_line = (middle_l + 1) * " " + (l_width - middle_l - 1) * "_" + s
+            second_line = (
+                middle_l * " " + "/" + (l_width - middle_l - 1 + key_width) * " "
+            )
+            tree_with_spaces = [line + " " * key_width for line in left_tree]
+            return (
+                [first_line, second_line] + tree_with_spaces,
+                l_width + key_width,
+                l_height + 2,
+                l_width + key_width // 2,
+            )
+
+        if self.left is None:
+            right_tree, r_width, r_height, middle_r = self.right.draw_node()
+            s = str(self.key)
+            key_width = len(s)
+
+            first_line = s + middle_r  * "_" + (r_width - middle_r) * " "
+            second_line = (
+                (middle_r + key_width) * " " + "\\" + (r_width - middle_r - 1) * " "
+            )
+            tree_with_spaces = [" " * key_width + line for line in right_tree]
+            return (
+                [first_line, second_line] + tree_with_spaces,
+                r_width + key_width,
+                r_height + 2,
+                middle_r // 2,
+            )
+
         s = str(self.key)
         s_width = len(s)
 
@@ -39,9 +73,9 @@ class BSTreeNode:
             + (r_width - middle_r - 1) * " "
         )
         if l_height > r_height:
-            right_tree += [r_height * " "] * (l_height - r_height)
+            right_tree += [r_width * " "] * (l_height - r_height)
         if r_height > l_height:
-            left_tree += [l_height * " "] * (r_height - l_height)
+            left_tree += [l_width * " "] * (r_height - l_height)
         zipped_lines = zip(left_tree, right_tree)
         lines = [first_line, second_line] + [
             a + s_width * " " + b for a, b in zipped_lines
