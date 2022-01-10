@@ -8,7 +8,7 @@ from ..sorting import (
     quick_sort_node,
     quick_sort,
 )
-from ....exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
+from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
 
 MAX_NUMBERS = 30
 

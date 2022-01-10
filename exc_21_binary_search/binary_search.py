@@ -2,8 +2,8 @@ from typing import Any, TypeVar, List, Optional
 from typing_extensions import Protocol
 from abc import abstractmethod
 
-from ..exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList  
-from ..exc_13_double_linked_list.double_linked_list.dl_node import DoubleLinkedListNode  
+from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
+from exc_13_double_linked_list.double_linked_list.dl_node import DoubleLinkedListNode
 
 T = TypeVar("T", "Comparable", int)
 
@@ -44,6 +44,7 @@ def binary_search(sorted_list: List[T], target: T) -> Optional[int]:
 
     return None
 
+
 def binary_search_on_list(sorted_list: DoubleLinkedList, target: int) -> Optional[int]:
     m = sorted_list.count() // 2
     r = sorted_list.count() - 1
@@ -55,7 +56,7 @@ def binary_search_on_list(sorted_list: DoubleLinkedList, target: int) -> Optiona
             m = (r + l) // 2
         elif target < sorted_list.get(m):
             r = m - 1
-            m = (r -l) // 2
+            m = (r - l) // 2
         else:
             return m
     return None

@@ -1,5 +1,5 @@
-from ...exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList 
-from ...exc_13_double_linked_list.double_linked_list.dl_node import DoubleLinkedListNode
+from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList 
+from exc_13_double_linked_list.double_linked_list.dl_node import DoubleLinkedListNode
 
 
 def bubble_sort(numbers: DoubleLinkedList):

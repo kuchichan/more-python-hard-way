@@ -1,6 +1,6 @@
 from ..binary_search import binary_search, binary_search_on_list
-from ...exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
-from ...exc_13_double_linked_list.double_linked_list.dl_node import DoubleLinkedListNode
+from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
+from exc_13_double_linked_list.double_linked_list.dl_node import DoubleLinkedListNode
 
 
 def test_binary_search():
