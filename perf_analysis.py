@@ -2,6 +2,7 @@ import random
 
 from shared.utils import time_attack
 from exc_21_binary_search.binary_search import binary_search, binary_search_on_list
+from exc_20_bst.bs_tree import BSTree
 from exc_13_double_linked_list.double_linked_list.dl_list import DoubleLinkedList
 
 POPULATION_RANGE = 500
@@ -32,10 +33,21 @@ def measure_double_linked_list():
         for target in targets:
             binary_search_on_list(double_linked_list, target)
 
+def measure_bst_tree():
+    tree = BSTree(0, "")
+    for i in range(1, LIST_RANGE):
+        tree.set(i, "")
+    
+    print("Measurement of time for binary search tree =>\n")
+    with time_attack():
+        for target in targets:
+            tree.get(target)
+    
 
 if __name__ == "__main__":
     print("Time comparison for binary search across different data structures:")
     print("=" * 30)
     measure_python_list()
     measure_double_linked_list()
+    measure_bst_tree()
 
