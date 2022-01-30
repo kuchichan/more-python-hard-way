@@ -1,4 +1,4 @@
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 
 
 class SuffixArray:
@@ -62,21 +62,33 @@ class SuffixArray:
 
         return -1, -1
 
-    def find_shortest(self, _string):
+    def find_shortest(self, _string) -> Tuple[int, int]:
         mid, starts_at = self.binary_search(_string)
         if mid < 0:
             return -1, -1
-        return self._sentence[starts_at:], starts_at
+        return mid, starts_at
 
-    def find_longest(self, string_: str) -> Optional[str]:
-        substring, index = self.find_shortest(string_)
+    def get_shortest_suffix(self, _string) -> Tuple[str, int]:
+        (
+            array_index,
+            _,
+        ) = self.find_shortest(_string)
 
-        if not substring:
-            return ""
+        if not array_index:
+            return "", -1
 
-        for suffix, _ in self.array[index:]:
-            if not suffix.startswith(string_):
+        return self._array[array_index][0], array_index
+
+    def get_longest_suffix(self, string_: str) -> Tuple[str, int]:
+        suffix, array_index = self.get_shortest_suffix(string_)
+
+        if not suffix:
+            "", -1
+
+        for temp_suffix, _ in self.array[array_index:]:
+            if not temp_suffix.startswith(string_):
                 break
-            substring = suffix
+            suffix = temp_suffix
+            array_index += 1
 
-        return substring
+        return suffix, array_index
